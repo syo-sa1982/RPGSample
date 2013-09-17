@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="32" height="11" tilewidth="32" tileheight="32">
+<map version="1.0" orientation="orthogonal" width="37" height="11" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="th_base" tilewidth="32" tileheight="32">
   <image source="th_base.png" width="256" height="9344"/>
  </tileset>
@@ -12,34 +12,29 @@
  <tileset firstgid="2359" name="c_splatter1" tilewidth="32" tileheight="32">
   <image source="../horror/c_splatter1.png" width="96" height="128"/>
  </tileset>
- <layer name="WallFloor" width="32" height="11">
+ <layer name="WallFloor" width="37" height="11">
   <data encoding="base64" compression="zlib">
-   eJwz4WRgMKEDNgBiHTSsjySnTWOsAsSFjKhYFWo3SC6WiYEhCg3HYxEjVy6aCbv9apwQuVQgTkLD6VjEyJVLxmM/Njl6YJj9A2E3zH69AbbfcADdoIojryK7R5fM/A4zA6YfWzzjst8QiTYk0350rEGC/bTA2OIYFDYA+vt29w==
+   eJwz4WRgMBkAbADEOmhYH4hBACavTWesAsSFjKhYFeomA6h8LBMDQxQSjgbieCCORBOnpjwuN6lxQuRTgTgJCScDcToQJ6KJU1Men5uwyQ8ERnbTQLsF3U16g9BNhpyDx10wN2ErO5DdqEthOQQzC2aOEZTGlmbwuckQiTak0E24sAaJbqIHxpZedKFuAgAan4W1
   </data>
  </layer>
- <layer name="Stairs" width="32" height="11">
+ <layer name="Stairs" width="37" height="11">
   <data encoding="base64" compression="zlib">
-   eJxjYKAfmMmIYM9mxK2OVmAh0M5FULx4BNq/EmjnKihePQD2j4KBBaP5b/DlPwCz4RH1
+   eJxjYBg4MJMRwZ7NiFsdPcFCoDsWQfHiUTfhBCuB7lgFxasHiZtGwdAFo2UBcWAwuglXWQAAqJ4R9Q==
   </data>
  </layer>
- <layer name="WallThrough" width="32" height="11" visible="0">
+ <layer name="WallThrough" width="37" height="11">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2BkAyXOgXYBA4MmJwIju0eRE1WOWAwzQxGLmaS4hxKgNQjCdTABUHggYxAAAKNmBbY=
+   eJxjYBgFo2AUDARQ4hxoF2AHmpwIjOxGRU5UOVIxzCx0c8gJB5heagCtQRoPQwWA4kELCcMAAJ4TBn0=
   </data>
  </layer>
- <layer name="Door" width="32" height="11">
+ <layer name="Door" width="37" height="11">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFuEACE/XlSAEZeMwhV24UjIJRMHgAAKMbAmU=
+   eJxjYBgFlIIEJtrKkwMyCJhJqfwoGAWjYBTgAwAv/QJl
   </data>
  </layer>
- <layer name="Decoration" width="32" height="11">
+ <layer name="Decoration" width="37" height="11">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMBAAAAWAAAE=
-  </data>
- </layer>
- <layer name="Meta" width="32" height="11">
-  <data encoding="base64" compression="zlib">
-   eJwz5WRgMB1BGAaIVUsLucFo/0CAgbR7MNk/0OFPaTolJR1Sw1x65X962A8AD80zlw==
+   eJxjYBgFo2AUjIJRMAqoCwAGXAAB
   </data>
  </layer>
 </map>
