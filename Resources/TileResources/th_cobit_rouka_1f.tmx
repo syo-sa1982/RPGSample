@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="37" height="12" tilewidth="32" tileheight="32">
- <tileset firstgid="1" name="yokan_in" tilewidth="32" tileheight="32">
-  <image source="gendaiTile/yokan_in.png" width="256" height="800"/>
+ <tileset firstgid="1" name="yokan" tilewidth="32" tileheight="32">
+  <image source="yokan.png" width="256" height="2048"/>
  </tileset>
- <tileset firstgid="201" name="kaidan" tilewidth="32" tileheight="32">
-  <image source="gendaiTile/kaidan.png" width="32" height="32"/>
- </tileset>
- <tileset firstgid="202" name="meta_tiles" tilewidth="32" tileheight="32" spacing="1" margin="1">
+ <tileset firstgid="513" name="meta_tiles" tilewidth="32" tileheight="32" spacing="1" margin="1">
   <image source="meta_tiles.png" width="67" height="34"/>
  </tileset>
  <layer name="WallFloor" width="37" height="12">
   <data encoding="base64" compression="zlib">
-   eJzN0k0LQEAQxvH1EqFIihs3vv/V0SczatTTU9qEWYffZUez/7Klc64MIBIxSDxzC6nIRK4q6uG5lVo0CpsK7cG5lV4MiptqmlvZxKS4qad5CNjUijlwDzdh1wLWF++72oXn3MSwsfN863Pu4j3HmxlvNFn4YxO/l6f/42s7exwe8w==
+   eJzN0r0KgDAMRtH6g2KFigh1003ff3X0yYwQIXwgRdS0w1maEi601hhjI8hILhSBuYaSVKRmLfTgXIsjHZNNDffIuRZPRoZNDuZadjIzbPIwj0E29WQhW0JNsmsVvmy82yXPsQnJxiFwN+TahXvOPzM9aNKQYhP+l7fv8bcDkAofjg==
   </data>
  </layer>
  <layer name="Stairs" width="37" height="12">
   <data encoding="base64" compression="zlib">
-   eJxjYBg44AilnQbQDejAE4hPArHXQDsECQxGNwUyQNwUNNAOGQWjgEZgtHwiDgxGN+ECAKgIB+M=
+   eJxjYBg44AilnQbQDejAE4gzGRkYvAbaIUhgMLopkAHipqCBdsgoGAU0AqPlE3FgMLoJFwAAEuUGCA==
   </data>
  </layer>
  <layer name="WallThrough" width="37" height="12">
@@ -29,9 +26,9 @@
    eJxjYBgFlAJpGsuTA5RpLE8O0Kax/CgYBaNgFOADAAiyATw=
   </data>
  </layer>
- <layer name="Decoration" width="37" height="12" visible="0">
+ <layer name="Meta" width="37" height="12">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMAqGPwAABvAAAQ==
+   eJxjYBi8gJEJEw80GHXT0HXTKBgFo2BkAwBMnwA9
   </data>
  </layer>
 </map>
