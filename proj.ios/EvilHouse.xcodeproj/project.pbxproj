@@ -270,6 +270,8 @@
 		8E8C1F9E180BEFFB00818BB3 /* 小雨640.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E8C1F5F180BEFFB00818BB3 /* 小雨640.png */; };
 		8E8C1F9F180BEFFB00818BB3 /* 小雨800.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E8C1F60180BEFFB00818BB3 /* 小雨800.png */; };
 		8E8C1FA0180BEFFB00818BB3 /* url.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8E8C1F61180BEFFB00818BB3 /* url.txt */; };
+		8E8C1FA5180CA44F00818BB3 /* character.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E8C1FA3180CA44F00818BB3 /* character.plist */; };
+		8E8C1FA6180CA44F00818BB3 /* character.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 8E8C1FA4180CA44F00818BB3 /* character.pvr */; };
 		8EEDB08F17E21A7600DBA03F /* meta_tiles.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EEDB08B17E21A7600DBA03F /* meta_tiles.png */; };
 		8EEDB09117E21A7600DBA03F /* th_cobit_rouka_1f.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 8EEDB08D17E21A7600DBA03F /* th_cobit_rouka_1f.tmx */; };
 		8EEDB09517E21BEF00DBA03F /* c_splatter1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EEDB09417E21BEF00DBA03F /* c_splatter1.png */; };
@@ -775,6 +777,8 @@
 		8E8C1F5F180BEFFB00818BB3 /* 小雨640.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "小雨640.png"; sourceTree = "<group>"; };
 		8E8C1F60180BEFFB00818BB3 /* 小雨800.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "小雨800.png"; sourceTree = "<group>"; };
 		8E8C1F61180BEFFB00818BB3 /* url.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = url.txt; sourceTree = "<group>"; };
+		8E8C1FA3180CA44F00818BB3 /* character.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = character.plist; sourceTree = "<group>"; };
+		8E8C1FA4180CA44F00818BB3 /* character.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = character.pvr; sourceTree = "<group>"; };
 		8EEDB08B17E21A7600DBA03F /* meta_tiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = meta_tiles.png; sourceTree = "<group>"; };
 		8EEDB08D17E21A7600DBA03F /* th_cobit_rouka_1f.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = th_cobit_rouka_1f.tmx; sourceTree = "<group>"; };
 		8EEDB09417E21BEF00DBA03F /* c_splatter1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = c_splatter1.png; sourceTree = "<group>"; };
@@ -1613,6 +1617,7 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8E8C1FA2180CA44F00818BB3 /* Character */,
 				8EEDB09317E21BEF00DBA03F /* horror */,
 				8EEDB08A17E21A7600DBA03F /* TileResources */,
 				1AFAF8B916D35E4900DB1158 /* CloseNormal.png */,
@@ -1741,6 +1746,15 @@
 			path = horror;
 			sourceTree = "<group>";
 		};
+		8E8C1FA2180CA44F00818BB3 /* Character */ = {
+			isa = PBXGroup;
+			children = (
+				8E8C1FA3180CA44F00818BB3 /* character.plist */,
+				8E8C1FA4180CA44F00818BB3 /* character.pvr */,
+			);
+			path = Character;
+			sourceTree = "<group>";
+		};
 		8EEDB08A17E21A7600DBA03F /* TileResources */ = {
 			isa = PBXGroup;
 			children = (
@@ -1862,6 +1876,7 @@
 				8E8C1F8D180BEFFB00818BB3 /* ノイズ320.png in Resources */,
 				1AFAF8BC16D35E4900DB1158 /* CloseNormal.png in Resources */,
 				8E8C1F72180BEFFB00818BB3 /* school_out_01.png in Resources */,
+				8E8C1FA6180CA44F00818BB3 /* character.pvr in Resources */,
 				8E8C1F82180BEFFB00818BB3 /* ひび800.png in Resources */,
 				1AFAF8BD16D35E4900DB1158 /* CloseSelected.png in Resources */,
 				8E8C1F9B180BEFFB00818BB3 /* 大雨640.png in Resources */,
@@ -1907,6 +1922,7 @@
 				8E8C1F9A180BEFFB00818BB3 /* 大雨320.png in Resources */,
 				8E8C1F77180BEFFB00818BB3 /* winding.png in Resources */,
 				8EEDB09517E21BEF00DBA03F /* c_splatter1.png in Resources */,
+				8E8C1FA5180CA44F00818BB3 /* character.plist in Resources */,
 				8E8C1F79180BEFFB00818BB3 /* yakusyo_in.png in Resources */,
 				8E8C1F89180BEFFB00818BB3 /* スクラッチノイズ.common in Resources */,
 				8E1B8FD917E5B3F90039BCFC /* th_cobit_rooms_1f_north.tmx in Resources */,
