@@ -32,8 +32,19 @@ bool HelloWorld::init()
     _tileMap = new CCTMXTiledMap();
     _tileMap->initWithTMXFile("th_cobit_rouka_1f.tmx");
     
-    
+    //
+    _wallFloor = _tileMap->layerNamed("WallFloor");
+    // メタレイヤー
+    _meta = _tileMap->layerNamed("Meta");
+    // プレイヤーの目からは見えなくする
+    _meta->setVisible(false);
+
+    // タイルマップ表示
     this->addChild(_tileMap);
+    
+    
+    // タッチを有効化
+    this->setTouchEnabled(true);
     
     return true;
 }

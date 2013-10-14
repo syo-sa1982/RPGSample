@@ -5,6 +5,11 @@
  </tileset>
  <tileset firstgid="513" name="meta_tiles" tilewidth="32" tileheight="32" spacing="1" margin="1">
   <image source="meta_tiles.png" width="67" height="34"/>
+  <tile id="0">
+   <properties>
+    <property name="Collidable" value="true"/>
+   </properties>
+  </tile>
  </tileset>
  <layer name="WallFloor" width="37" height="12">
   <data encoding="base64" compression="zlib">
@@ -16,6 +21,9 @@
    eJxjYBg44AilnQbQDejAE4gzGRkYvAbaIUhgMLopkAHipqCBdsgoGAU0AqPlE3FgMLoJFwAAEuUGCA==
   </data>
  </layer>
+ <objectgroup name="Object" width="37" height="12">
+  <object name="SpawnPoint" x="80" y="208"/>
+ </objectgroup>
  <layer name="WallThrough" width="37" height="12">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AUDATgGWgH4ABCSBjZjbxocqRiHhzmkBMOML3UANQyZ6QC5Lgc7AAATosCMQ==

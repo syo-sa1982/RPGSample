@@ -19,6 +19,9 @@ public:
     
 private:
     CCTMXTiledMap *_tileMap;
+    CCTMXLayer    *_wallFloor;
+    CCTMXLayer    *_meta;
+    CCSprite      *_player;
     
 };
 
