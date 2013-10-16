@@ -17,6 +17,17 @@ public:
     // implement the "static node()" method manually
     CREATE_FUNC(HelloWorld);
     
+    /**
+     @brief 画面の視野をプレイヤーの周辺に設定
+     */
+    void setViewPlayerCenter();
+    
+    /**
+     @brief キャラクタの位置をセット
+     */
+//    void setPlayerPosition(CCPoint position);
+//    void registerWithTouchDispatcher();
+    
 private:
     CCTMXTiledMap *_tileMap;
     CCTMXLayer    *_wallFloor;
