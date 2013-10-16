@@ -1,3 +1,6 @@
 *.pbxproj -crlf -diff -merge
+proj.ios/*.xcodeproj/*.pbxproj -crlf -diff -merge
+proj.ios/* -merge
+
 *.xib -crlf -diff -merge
 
