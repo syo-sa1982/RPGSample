@@ -25,14 +25,31 @@ public:
     /**
      @brief キャラクタの位置をセット
      */
-//    void setPlayerPosition(CCPoint position);
-//    void registerWithTouchDispatcher();
+    void setPlayerPosition(CCPoint position);
+    void registerWithTouchDispatcher();
+    /**
+     @brief タップ開始
+     */
+    virtual bool ccTouchBegan(CCTouch *touch, CCEvent *event);
+    
+    /**
+     @brief タップ終了
+     */
+    virtual void ccTouchEnded(CCTouch *touch, CCEvent *event);
     
 private:
     CCTMXTiledMap *_tileMap;
     CCTMXLayer    *_wallFloor;
     CCTMXLayer    *_meta;
     CCSprite      *_player;
+    
+    
+    /**
+     @brief タップした箇所のタイル座標を取得
+     */
+    CCPoint tileCoordForPosition(CCPoint position);
+    
+    CCPoint getDestinationPos(CCPoint touchLocation);
     
 };
 
