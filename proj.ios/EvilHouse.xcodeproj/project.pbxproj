@@ -206,6 +206,8 @@
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		7855E0E1153FEF240059DD9A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7855E0DF153FEF240059DD9A /* Default.png */; };
 		8E1B8FD917E5B3F90039BCFC /* th_cobit_rooms_1f_north.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 8E1B8FD817E5B3F90039BCFC /* th_cobit_rooms_1f_north.tmx */; };
+		8E468B2E18129161001497E0 /* yokan64.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E468B2C18129161001497E0 /* yokan64.png */; };
+		8E468B2F18129161001497E0 /* th_cobit_rouka_1f_64.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 8E468B2D18129161001497E0 /* th_cobit_rouka_1f_64.tmx */; };
 		8E4D80B118042BFB0037A6EF /* yokan.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E4D80B018042BFB0037A6EF /* yokan.png */; };
 		8E8C1F62180BEFFB00818BB3 /* apart_boro.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E8C1F22180BEFFB00818BB3 /* apart_boro.png */; };
 		8E8C1F63180BEFFB00818BB3 /* cleancentre.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E8C1F23180BEFFB00818BB3 /* cleancentre.png */; };
@@ -714,6 +716,8 @@
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		7855E0DF153FEF240059DD9A /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = SOURCE_ROOT; };
 		8E1B8FD817E5B3F90039BCFC /* th_cobit_rooms_1f_north.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = th_cobit_rooms_1f_north.tmx; sourceTree = "<group>"; };
+		8E468B2C18129161001497E0 /* yokan64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yokan64.png; sourceTree = "<group>"; };
+		8E468B2D18129161001497E0 /* th_cobit_rouka_1f_64.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = th_cobit_rouka_1f_64.tmx; sourceTree = "<group>"; };
 		8E4D80B018042BFB0037A6EF /* yokan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yokan.png; sourceTree = "<group>"; };
 		8E8C1F22180BEFFB00818BB3 /* apart_boro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = apart_boro.png; sourceTree = "<group>"; };
 		8E8C1F23180BEFFB00818BB3 /* cleancentre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cleancentre.png; sourceTree = "<group>"; };
@@ -1776,6 +1780,8 @@
 		8EEDB08A17E21A7600DBA03F /* TileResources */ = {
 			isa = PBXGroup;
 			children = (
+				8E468B2C18129161001497E0 /* yokan64.png */,
+				8E468B2D18129161001497E0 /* th_cobit_rouka_1f_64.tmx */,
 				8E8C1FAA180CB18300818BB3 /* Player.png */,
 				8E4D80B018042BFB0037A6EF /* yokan.png */,
 				8E1B8FD817E5B3F90039BCFC /* th_cobit_rooms_1f_north.tmx */,
@@ -1889,6 +1895,7 @@
 				8E8C1F85180BEFFB00818BB3 /* もや640.jpg in Resources */,
 				8E8C1F9D180BEFFB00818BB3 /* 小雨320.png in Resources */,
 				15A3D9961682F7F9002FB0C5 /* CMakeLists.txt in Resources */,
+				8E468B2E18129161001497E0 /* yokan64.png in Resources */,
 				8E8C1F8F180BEFFB00818BB3 /* ノイズ800.png in Resources */,
 				8E8C1F6B180BEFFB00818BB3 /* mansion01.png in Resources */,
 				8E8C1F6F180BEFFB00818BB3 /* policeoffice_out.png in Resources */,
@@ -1936,6 +1943,7 @@
 				8EEDB09117E21A7600DBA03F /* th_cobit_rouka_1f.tmx in Resources */,
 				8E8C1F64180BEFFB00818BB3 /* danchi.png in Resources */,
 				8E8C1F7F180BEFFB00818BB3 /* ひとだま.common in Resources */,
+				8E468B2F18129161001497E0 /* th_cobit_rouka_1f_64.tmx in Resources */,
 				8E8C1F7D180BEFFB00818BB3 /* Enter5.ogg in Resources */,
 				8E8C1F7C180BEFFB00818BB3 /* c_splatter1.png in Resources */,
 				8E8C1F88180BEFFB00818BB3 /* もや800_薄.jpg in Resources */,
