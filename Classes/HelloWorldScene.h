@@ -49,9 +49,6 @@ private:
     CCTMXLayer    *_meta;
     CCSprite      *_player;
     
-    CCPoint getTilePosition(CCPoint point);
-    
-    
     /**
      @brief タップした箇所のタイル座標を取得
      */
