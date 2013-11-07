@@ -40,12 +40,9 @@ bool HelloWorld::init()
     CCSize CC_UNUSED tileSize = _tileMap->getContentSize();
     CCLOG("ContentSize: %f, %f", tileSize.width,tileSize.height);
     
+    _player = CCSprite::create("Player.png");
     
-//    _player = CCSprite::create("Player.png");
-    
-    _player = CCSprite::create("Player.png", CCRectMake(0, 0, 27, 40));
-    
-    CCTMXObjectGroup *objectGroup = _tileMap->objectGroupNamed("Object");
+    CCTMXObjectGroup *objectGroup = _tileMap->objectGroupNamed("Objects");
     if (objectGroup == NULL) {
         CCLog("tile map has no objects object layer");
         return false;
@@ -66,16 +63,12 @@ bool HelloWorld::init()
     
     _tileMap->addChild(_player, 1);
     
-    
     CCPoint playerPos = _player->getPosition();
     
-//    _wallThrough = _tileMap->layerNamed("WallThrough");
-//    _wallFloor = _tileMap->layerNamed("WallFloor");
     // メタレイヤー
     _meta = _tileMap->layerNamed("Meta");
     // プレイヤーの目からは見えなくする
     _meta->setVisible(false);
-
     
     // 画面の表示座標をセット
     this->setViewPlayerCenter();

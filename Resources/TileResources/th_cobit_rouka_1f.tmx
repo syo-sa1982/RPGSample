@@ -18,20 +18,18 @@
  </layer>
  <layer name="Stairs" width="37" height="12">
   <data encoding="base64" compression="zlib">
-   eJxjYBg44AilnQbQDejAE4gzGRkYvAbaIUhgMLopkAHipqCBdsgoGAU0AqPlE3FgMLoJFwAAEuUGCA==
+   eJxjYBg44AilnQbQDejAE4gzGRkYvEjQI01jeXLcpExj+UAGiJuCiHcSgzaN5UfBKKAmGC7lE63BYHQTLgAAFKcHQw==
   </data>
  </layer>
- <objectgroup name="Object" width="37" height="12">
+ <objectgroup name="Objects" width="37" height="12">
   <object name="SpawnPoint" x="80" y="208"/>
+  <object name="North1" type="Door" x="240" y="144"/>
+  <object name="North2" type="Door" x="496" y="144"/>
+  <object name="North3" type="Door" x="752" y="144"/>
  </objectgroup>
  <layer name="WallThrough" width="37" height="12" opacity="0.67">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AUDATgGWgH4ABCSBjZjbxocqRiHhzmkBMOML3UANQyZ6QC5Lgc7AAATosCMQ==
-  </data>
- </layer>
- <layer name="Door" width="37" height="12">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFlAJpGsuTA5RpLE8O0Kax/CgYBaNgFOADAAiyATw=
   </data>
  </layer>
  <layer name="Meta" width="37" height="12">
