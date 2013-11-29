@@ -1,25 +1,38 @@
 # OS X Finder
 .DS_Store
 
-# Xcode per-user config
-*.mode1
-*.mode1v3
-*.mode2v3
-*.perspective
-*.perspectivev3
+# Xcode
+build/*
 *.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
 *.xcworkspace
+!default.xcworkspace
 xcuserdata
+profile
+*.moved-aside
 
-# Build products
-build/
-*.o
-*.LinkFileList
-*.hmap
+#CocoaPod
+Pods/*
 
-# Automatic backup files
-*~.nib/
-*.swp
-*~
-*.dat
-*.dep
+#IDEA
+.idea/*
+
+#cocos2d-x
+libs/
+bin/
+obj/
+assets/
+gen/
+out/
+.classpath
+.project
+.cproject
+
+#JAVA
+*.class
