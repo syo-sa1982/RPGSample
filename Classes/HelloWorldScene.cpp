@@ -2,7 +2,6 @@
 
 USING_NS_CC;
 
-
 enum {
     kTagTileMap = 1,
     kTagPlayer  = 2,
@@ -40,7 +39,8 @@ bool HelloWorld::init()
     CCSize CC_UNUSED tileSize = _tileMap->getContentSize();
     CCLOG("ContentSize: %f, %f", tileSize.width,tileSize.height);
     
-    _player = CCSprite::create("Player.png");
+    
+    
     
     CCTMXObjectGroup *objectGroup = _tileMap->objectGroupNamed("Objects");
     if (objectGroup == NULL) {
@@ -53,6 +53,16 @@ bool HelloWorld::init()
     
     int x = ((CCString)*spawnPoint->valueForKey("x")).intValue();
     int y = ((CCString)*spawnPoint->valueForKey("y")).intValue();
+    
+    // テクスチャアトラスからのキャラ生成
+    CCSpriteFrameCache* frameCache = CCSpriteFrameCache::sharedSpriteFrameCache();
+//    CCSize size = CCDirector::sharedDirector()->getWinSize();
+    frameCache->addSpriteFramesWithFile("character.plist");
+    
+//    _player = CCSprite::create("Player.png");
+    
+    _player = CCSprite::createWithSpriteFrameName("male_walkcycle_e_01.png");
+    
     
     // プレイヤーをタグ識別
     _player->setTag(kTagPlayer);
@@ -85,7 +95,7 @@ HelloWorld::~HelloWorld()
     _player->release();
 }
 
-
+// プレイヤーの位置をセンターに
 void HelloWorld::setViewPlayerCenter()
 {
     //    CCLog("setViewPlayerCenter");
@@ -147,7 +157,7 @@ CCPoint HelloWorld::tileCoordForPosition(CCPoint position)
 
 void HelloWorld::registerWithTouchDispatcher()
 {
-    // シングルはこっち
+    // シングルタッチ
     CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, 0, true);
 }
 
@@ -177,12 +187,10 @@ bool HelloWorld::ccTouchBegan(CCTouch *touch, CCEvent *event)
     return true;
 }
 
-
 void HelloWorld::ccTouchEnded(CCTouch *touch, CCEvent *event)
 {
     CCLog("TouchEnd!");
 }
-
 
 CCPoint HelloWorld::getDestinationPos(CCPoint touchLocation)
 {
@@ -204,4 +212,9 @@ CCPoint HelloWorld::getDestinationPos(CCPoint touchLocation)
     }
     
     return playerPos;
+}
+
+void playHeroMoveAnimationFromPosition(CCPoint position)
+{
+
 }

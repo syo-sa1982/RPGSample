@@ -21,24 +21,20 @@ public:
     
     void repositionSprite(float dt);
     
-    /**
-     @brief 画面の視野をプレイヤーの周辺に設定
-     */
+    // 画面の視野をプレイヤーの周辺に設定
     void setViewPlayerCenter();
     
-    /**
-     @brief キャラクタの位置をセット
-     */
+    // キャラクタの位置をセット
     void setPlayerPosition(CCPoint position);
     void registerWithTouchDispatcher();
-    /**
-     @brief タップ開始
-     */
+    
+    // キャラクタアニメーション
+    void playHeroMoveAnimationFromPosition(CCPoint position);
+    
+    // タップ開始
     virtual bool ccTouchBegan(CCTouch *touch, CCEvent *event);
     
-    /**
-     @brief タップ終了
-     */
+    // タップ終了
     virtual void ccTouchEnded(CCTouch *touch, CCEvent *event);
     
 private:
@@ -49,9 +45,8 @@ private:
     CCTMXLayer    *_meta;
     CCSprite      *_player;
     
-    /**
-     @brief タップした箇所のタイル座標を取得
-     */
+    
+    // タップした箇所のタイル座標を取得
     CCPoint tileCoordForPosition(CCPoint position);
     
     CCPoint getDestinationPos(CCPoint touchLocation);
