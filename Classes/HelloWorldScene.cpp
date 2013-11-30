@@ -69,7 +69,10 @@ bool HelloWorld::init()
     _player->retain();
     
     // スプライトに座標セット
+//    _player->setPosition(ccp(size.width/2, size.height/2));
     _player->setPosition(ccp(x,y));
+    _player->setScale(1);
+    _player->setAnchorPoint(ccp(0.5,0));
     
     _tileMap->addChild(_player, 1);
     
