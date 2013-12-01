@@ -8,4 +8,9 @@
    eJzjYmBg4BrFRGN2OmFS3MRPJ0yKm8TphElxkzyd8KibqO+mUTyKqYEBuwkZRQ==
   </data>
  </layer>
+ <layer name="WallThrough" width="37" height="12">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMAqGPwAABvAAAQ==
+  </data>
+ </layer>
 </map>
