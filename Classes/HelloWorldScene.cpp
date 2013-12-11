@@ -217,7 +217,22 @@ CCPoint HelloWorld::getDestinationPos(CCPoint touchLocation)
     return playerPos;
 }
 
-void playHeroMoveAnimationFromPosition(CCPoint position)
+void playHeroMoveAnimationFromPosition(CCPoint fromPosition, CCPoint toPosition)
 {
-
+    std::string direction = "n";
+    if(toPosition.x > fromPosition.x){
+        direction = "e";
+    }else if(toPosition.x < fromPosition.x){
+        direction = "w";
+    }else if(toPosition.y < fromPosition.y){
+        direction = "s";
+    }
+    
+    CCString *walkCycle = CCString::createWithFormat("male_walkcycle_%s_%%02d.png",direction.c_str());
+    
+    
+    
+    CCString *string =CCString::create("hogehoge");
+    std::string hogehoge = string->m_sString;
+    std::string getString(hogehoge,1,1);
 }

@@ -1,5 +1,7 @@
-APPNAME="HelloCpp"
-
+APPNAME="EvilHouse"
+# set params
+# NDK_ROOT=$HOME/android-ndk/android-ndk-r9
+NDK_ROOT=$HOME/android-ndk/android-ndk-r8e
 # options
 
 buildexternalsfromsource=

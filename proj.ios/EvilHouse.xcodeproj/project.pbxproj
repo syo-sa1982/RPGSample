@@ -277,6 +277,7 @@
 		8E8C1FA5180CA44F00818BB3 /* character.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E8C1FA3180CA44F00818BB3 /* character.plist */; };
 		8E8C1FA6180CA44F00818BB3 /* character.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 8E8C1FA4180CA44F00818BB3 /* character.pvr */; };
 		8E8C1FAB180CB18300818BB3 /* Player.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E8C1FAA180CB18300818BB3 /* Player.png */; };
+		8E9BBBF2184C956600365AF2 /* File.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E9BBBF0184C956600365AF2 /* File.cpp */; };
 		8EEDB08F17E21A7600DBA03F /* meta_tiles.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EEDB08B17E21A7600DBA03F /* meta_tiles.png */; };
 		8EEDB09117E21A7600DBA03F /* th_cobit_rouka_1f.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 8EEDB08D17E21A7600DBA03F /* th_cobit_rouka_1f.tmx */; };
 		8EEDB09517E21BEF00DBA03F /* c_splatter1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EEDB09417E21BEF00DBA03F /* c_splatter1.png */; };
@@ -791,6 +792,8 @@
 		8E8C1FA3180CA44F00818BB3 /* character.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = character.plist; sourceTree = "<group>"; };
 		8E8C1FA4180CA44F00818BB3 /* character.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = character.pvr; sourceTree = "<group>"; };
 		8E8C1FAA180CB18300818BB3 /* Player.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Player.png; sourceTree = "<group>"; };
+		8E9BBBF0184C956600365AF2 /* File.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = File.cpp; path = ../Classes/File.cpp; sourceTree = "<group>"; };
+		8E9BBBF1184C956600365AF2 /* File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = File.h; path = ../Classes/File.h; sourceTree = "<group>"; };
 		8EA7D3E8183F8CD400279A8D /* config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = config.h; path = ../Classes/config.h; sourceTree = "<group>"; };
 		8EEDB08B17E21A7600DBA03F /* meta_tiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = meta_tiles.png; sourceTree = "<group>"; };
 		8EEDB08D17E21A7600DBA03F /* th_cobit_rouka_1f.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = th_cobit_rouka_1f.tmx; sourceTree = "<group>"; };
@@ -1339,6 +1342,8 @@
 				8E6E35441832EAF9009A4108 /* DetailMapManager.cpp */,
 				8E6E35451832EAF9009A4108 /* DetailMapManager.h */,
 				8EA7D3E8183F8CD400279A8D /* config.h */,
+				8E9BBBF0184C956600365AF2 /* File.cpp */,
+				8E9BBBF1184C956600365AF2 /* File.h */,
 			);
 			name = Classes;
 			path = ../classes;
@@ -2131,6 +2136,7 @@
 				1A8F3B80175E05DA00049216 /* Slot.cpp in Sources */,
 				1A8F3B81175E05DA00049216 /* SlotData.cpp in Sources */,
 				1A8F3B82175E05DA00049216 /* spine-cocos2dx.cpp in Sources */,
+				8E9BBBF2184C956600365AF2 /* File.cpp in Sources */,
 				1AB87035175E0A84005D39BF /* WebSocket.cpp in Sources */,
 				1A9CE8781765A12C000E3062 /* AssetsManager.cpp in Sources */,
 				1A9CE8791765A12C000E3062 /* CCArmatureAnimation.cpp in Sources */,
