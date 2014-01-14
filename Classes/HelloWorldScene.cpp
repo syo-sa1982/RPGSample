@@ -40,8 +40,6 @@ bool HelloWorld::init()
     CCLOG("ContentSize: %f, %f", tileSize.width,tileSize.height);
     
     
-    
-    
     CCTMXObjectGroup *objectGroup = _tileMap->objectGroupNamed("Objects");
     if (objectGroup == NULL) {
         CCLog("tile map has no objects object layer");
@@ -55,9 +53,9 @@ bool HelloWorld::init()
     int y = ((CCString)*spawnPoint->valueForKey("y")).intValue();
     
     // テクスチャアトラスからのキャラ生成
-    CCSpriteFrameCache* frameCache = CCSpriteFrameCache::sharedSpriteFrameCache();
+    _frameCache = CCSpriteFrameCache::sharedSpriteFrameCache();
 //    CCSize size = CCDirector::sharedDirector()->getWinSize();
-    frameCache->addSpriteFramesWithFile("character.plist");
+    _frameCache->addSpriteFramesWithFile("character.plist");
     
 //    _player = CCSprite::create("Player.png");
     
@@ -76,7 +74,7 @@ bool HelloWorld::init()
     
     _tileMap->addChild(_player, 1);
     
-    CCPoint playerPos = _player->getPosition();
+//    CCPoint playerPos = _player->getPosition();
     
     // メタレイヤー
     _meta = _tileMap->layerNamed("Meta");
@@ -120,24 +118,35 @@ void HelloWorld::setViewPlayerCenter()
 void HelloWorld::setPlayerPosition(CCPoint position)
 {
     CCPoint tileCoord = this->tileCoordForPosition(position);
+    CCPoint frompos = _player->getPosition();
+
     int tileGid = _meta->tileGIDAt(tileCoord);
+
     if (tileGid) {
         CCDictionary *properties = _tileMap->propertiesForGID(tileGid);
         if (properties) {
             CCString *collision = new CCString();
             *collision = *properties->valueForKey("Collidable");
             if (collision && (collision->compare("true") == 0)) {
+                this->playHeroMoveAnimationFromPosition(frompos, position);
                 return;
-            }
-            
-            CCString *collectible = new CCString();
-            *collectible = *properties->valueForKey("Collectable");
-            if (collectible && (collectible->compare("true") == 0)) {
-                _meta->removeTileAt(tileCoord);
             }
         }
     }
-    _player->setPosition(position);
+    this->playHeroMoveAnimationFromPosition(frompos, position);
+    CCMoveTo* moveTo = CCMoveTo::create(0.1f, position);
+    _player->runAction(moveTo);
+
+    std::cout << "10D10===========================" << std::endl;
+    dice.roll(10, 10);
+    int result = dice.getRollResult();
+    dice.reset();
+    std::cout << "合計値 : " << result << std::endl;
+
+    if (this->isEncountered(result)) {
+        std::cout << "敵が現れた！！" << std::endl;
+    }
+
 }
 
 CCPoint HelloWorld::tileCoordForPosition(CCPoint position)
@@ -166,18 +175,18 @@ void HelloWorld::registerWithTouchDispatcher()
 
 bool HelloWorld::ccTouchBegan(CCTouch *touch, CCEvent *event)
 {
-    CCLog("Touch!");
+    CCLog("ccTouchBegan!");
     // タップした座標
     CCPoint touchLocation = touch->getLocationInView();
-    
+
     CCPoint playerPos = ((CCSprite *)_tileMap->getChildByTag(kTagPlayer))->getPosition();
-    
+
     touchLocation = CCDirector::sharedDirector()->convertToGL(touchLocation);
     touchLocation = this->convertToNodeSpace(touchLocation);
-    
+
     // 目的地
     CCPoint destinationPos = this->getDestinationPos(touchLocation);
-    
+
     // safety check on the bounds of the map
     if (destinationPos.x <= (_tileMap->getMapSize().width * _tileMap->getTileSize().width) &&
         destinationPos.y <= (_tileMap->getMapSize().height * _tileMap->getTileSize().height) &&
@@ -186,7 +195,8 @@ bool HelloWorld::ccTouchBegan(CCTouch *touch, CCEvent *event)
     {
         this->setPlayerPosition(destinationPos);
     }
-    
+
+    CCLog("ccTouchBegan end!");
     return true;
 }
 
@@ -217,9 +227,9 @@ CCPoint HelloWorld::getDestinationPos(CCPoint touchLocation)
     return playerPos;
 }
 
-void playHeroMoveAnimationFromPosition(CCPoint fromPosition, CCPoint toPosition)
+void HelloWorld::playHeroMoveAnimationFromPosition(CCPoint fromPosition, CCPoint toPosition)
 {
-    std::string direction = "n";
+    char* direction = "n";
     if(toPosition.x > fromPosition.x){
         direction = "e";
     }else if(toPosition.x < fromPosition.x){
@@ -227,12 +237,18 @@ void playHeroMoveAnimationFromPosition(CCPoint fromPosition, CCPoint toPosition)
     }else if(toPosition.y < fromPosition.y){
         direction = "s";
     }
-    
-    CCString *walkCycle = CCString::createWithFormat("male_walkcycle_%s_%%02d.png",direction.c_str());
-    
-    
-    
-    CCString *string =CCString::create("hogehoge");
-    std::string hogehoge = string->m_sString;
-    std::string getString(hogehoge,1,1);
+    std::cout <<  "This walkCycle" << std::endl;
+    CCArray* frames = CCArray::createWithCapacity(9);
+    for (int i = 0; i < 9; ++i) {
+
+        CCString *walkCycle = CCString::createWithFormat("male_walkcycle_%s_%02d.png",direction, (i+1));
+
+        frames->addObject(_frameCache->spriteFrameByName(walkCycle->getCString()));
+
+        std::cout <<  walkCycle->getCString() << std::endl;
+    }
+
+    CCAnimation* animation = CCAnimation::createWithSpriteFrames(frames, 0.05f);
+    CCAnimate* animate = CCAnimate::create(animation);
+    _player->runAction(animate);
 }

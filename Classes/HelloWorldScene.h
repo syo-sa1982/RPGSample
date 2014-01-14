@@ -2,12 +2,15 @@
 #define __HELLOWORLD_SCENE_H__
 
 #include "cocos2d.h"
-
-USING_NS_CC;
-//using namespace std;
+#include "Dice.h"
 
 class HelloWorld : public cocos2d::CCLayer
 {
+    enum
+    {
+        kEncounterRate = 50,
+    };
+
 public:
     // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
     virtual bool init();
@@ -25,31 +28,37 @@ public:
     void setViewPlayerCenter();
     
     // キャラクタの位置をセット
-    void setPlayerPosition(CCPoint position);
+    void setPlayerPosition(cocos2d::CCPoint position);
     void registerWithTouchDispatcher();
     
     // キャラクタアニメーション
-    void playHeroMoveAnimationFromPosition(CCPoint position);
+    void playHeroMoveAnimationFromPosition(cocos2d::CCPoint fromPosition, cocos2d::CCPoint toPosition);
     
     // タップ開始
-    virtual bool ccTouchBegan(CCTouch *touch, CCEvent *event);
+    virtual bool ccTouchBegan(cocos2d::CCTouch *touch, cocos2d::CCEvent *event);
     
     // タップ終了
-    virtual void ccTouchEnded(CCTouch *touch, CCEvent *event);
+    virtual void ccTouchEnded(cocos2d::CCTouch *touch, cocos2d::CCEvent *event);
+
+    // タップした箇所のタイル座標を取得
+    cocos2d::CCPoint tileCoordForPosition(cocos2d::CCPoint position);
+
+    cocos2d::CCPoint getDestinationPos(cocos2d::CCPoint touchLocation);
+
+    inline bool isEncountered(int rollRsulte)
+    {
+        return kEncounterRate > rollRsulte ? true :false;
+    }
     
 private:
-    CCTMXTiledMap *_tileMap;
-    CCTMXTiledMap *_tileMapTop;
-    CCTMXLayer    *_wallFloor;
-    CCTMXLayer    *_wallThrough;
-    CCTMXLayer    *_meta;
-    CCSprite      *_player;
+    cocos2d::CCTMXTiledMap      *_tileMap;
+    cocos2d::CCTMXLayer         *_meta;
+    cocos2d::CCSprite           *_player;
+    cocos2d::CCSpriteFrameCache *_frameCache;
+
+    Dice dice;
     
-    
-    // タップした箇所のタイル座標を取得
-    CCPoint tileCoordForPosition(CCPoint position);
-    
-    CCPoint getDestinationPos(CCPoint touchLocation);
+
     
 };
 
