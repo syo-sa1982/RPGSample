@@ -1,4 +1,5 @@
 #include "HelloWorldScene.h"
+#include "BattleScene.h"
 
 USING_NS_CC;
 
@@ -145,6 +146,7 @@ void HelloWorld::setPlayerPosition(CCPoint position)
 
     if (this->isEncountered(result)) {
         std::cout << "敵が現れた！！" << std::endl;
+        CCDirector::sharedDirector()->replaceScene( CCTransitionFade::create(3.0f,BattleScene::createScene()) );
     }
 
 }

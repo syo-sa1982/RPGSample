@@ -204,6 +204,7 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
+		74061D30B076111CC1400CF8 /* BattleScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 740613C62EC84C518A477458 /* BattleScene.cpp */; };
 		74061FC529D2A6351772E228 /* Dice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7406153C91FA99BD53E093B6 /* Dice.cpp */; };
 		7855E0E1153FEF240059DD9A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7855E0DF153FEF240059DD9A /* Default.png */; };
 		8E1B8FD917E5B3F90039BCFC /* th_cobit_rooms_1f_north.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 8E1B8FD817E5B3F90039BCFC /* th_cobit_rooms_1f_north.tmx */; };
@@ -717,8 +718,10 @@
 		1D6058910D05DD3D006BFB54 /* EvilHouse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EvilHouse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		740613C62EC84C518A477458 /* BattleScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BattleScene.cpp; sourceTree = "<group>"; };
 		7406153C91FA99BD53E093B6 /* Dice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dice.cpp; sourceTree = "<group>"; };
 		74061BD2338EE919D5E0FFA0 /* Dice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dice.h; sourceTree = "<group>"; };
+		74061F6036686F3A2230E38F /* BattleScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattleScene.h; sourceTree = "<group>"; };
 		7855E0DF153FEF240059DD9A /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = SOURCE_ROOT; };
 		8E1B8FD817E5B3F90039BCFC /* th_cobit_rooms_1f_north.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = th_cobit_rooms_1f_north.tmx; sourceTree = "<group>"; };
 		8E468B2C18129161001497E0 /* yokan64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yokan64.png; sourceTree = "<group>"; };
@@ -1344,6 +1347,8 @@
 				8EA7D3E8183F8CD400279A8D /* config.h */,
 				74061BD2338EE919D5E0FFA0 /* Dice.h */,
 				7406153C91FA99BD53E093B6 /* Dice.cpp */,
+				740613C62EC84C518A477458 /* BattleScene.cpp */,
+				74061F6036686F3A2230E38F /* BattleScene.h */,
 			);
 			name = Classes;
 			path = ../classes;
@@ -2169,6 +2174,7 @@
 				1A9CE8991765A12C000E3062 /* CCComController.cpp in Sources */,
 				1A9CE89A1765A12C000E3062 /* CCInputDelegate.cpp in Sources */,
 				74061FC529D2A6351772E228 /* Dice.cpp in Sources */,
+				74061D30B076111CC1400CF8 /* BattleScene.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
