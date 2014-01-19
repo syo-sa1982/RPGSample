@@ -8,11 +8,13 @@ enum {
     kTagPlayer  = 2,
 };
 
-CCScene* HelloWorld::scene()
+CCScene* HelloWorld::scene(int hoge)
 {
+    std::cout << "引数：" << hoge << std::endl;
+
     // 'scene' is an autorelease object
     CCScene *scene = CCScene::create();
-    
+
     // 'layer' is an autorelease object
     HelloWorld *layer = HelloWorld::create();
 
@@ -32,63 +34,62 @@ bool HelloWorld::init()
     {
         return false;
     }
-    
+
     // タイルマップ呼び出し
     _tileMap = CCTMXTiledMap::create("th_cobit_rouka_1f.tmx");
     this->addChild(_tileMap, 0, kTagTileMap);
-    
+
     CCSize CC_UNUSED tileSize = _tileMap->getContentSize();
     CCLOG("ContentSize: %f, %f", tileSize.width,tileSize.height);
-    
-    
+
+
     CCTMXObjectGroup *objectGroup = _tileMap->objectGroupNamed("Objects");
     if (objectGroup == NULL) {
         CCLog("tile map has no objects object layer");
         return false;
     }
-    
+
     // tmx上のSpawnPointの座標を取得
     CCDictionary *spawnPoint = objectGroup->objectNamed("SpawnPoint");
-    
+
     int x = ((CCString)*spawnPoint->valueForKey("x")).intValue();
     int y = ((CCString)*spawnPoint->valueForKey("y")).intValue();
-    
+
     // テクスチャアトラスからのキャラ生成
     _frameCache = CCSpriteFrameCache::sharedSpriteFrameCache();
 //    CCSize size = CCDirector::sharedDirector()->getWinSize();
     _frameCache->addSpriteFramesWithFile("character.plist");
-    
+
 //    _player = CCSprite::create("Player.png");
-    
+
     _player = CCSprite::createWithSpriteFrameName("male_walkcycle_e_01.png");
-    
-    
+
     // プレイヤーをタグ識別
     _player->setTag(kTagPlayer);
     _player->retain();
-    
+
     // スプライトに座標セット
 //    _player->setPosition(ccp(size.width/2, size.height/2));
     _player->setPosition(ccp(x,y));
     _player->setScale(1);
     _player->setAnchorPoint(ccp(0.5,0));
-    
+
     _tileMap->addChild(_player, 1);
-    
+
 //    CCPoint playerPos = _player->getPosition();
-    
+
     // メタレイヤー
     _meta = _tileMap->layerNamed("Meta");
     // プレイヤーの目からは見えなくする
     _meta->setVisible(false);
-    
+
     // 画面の表示座標をセット
     this->setViewPlayerCenter();
     this->schedule(schedule_selector(HelloWorld::setViewPlayerCenter));
-    
+
     // タッチを有効化
     this->setTouchEnabled(true);
-    
+
     return true;
 }
 
@@ -102,15 +103,15 @@ void HelloWorld::setViewPlayerCenter()
 {
     //    CCLog("setViewPlayerCenter");
     CCPoint playerPos = ((CCSprite *)_tileMap->getChildByTag(kTagPlayer))->getPosition();
-    
+
     CCSize winSize = CCDirector::sharedDirector()->getWinSize();
-    
+
     int x = MAX(playerPos.x, winSize.width/2);
     int y = MAX(playerPos.y, winSize.height/2);
     x = MIN(x, (_tileMap->getMapSize().width * this->_tileMap->getTileSize().width) - winSize.width / 2);
     y = MIN(y, (_tileMap->getMapSize().height * _tileMap->getTileSize().height) - winSize.height/2);
     CCPoint actualPosition = ccp(x, y);
-    
+
     CCPoint centerOfView = ccp(winSize.width/2, winSize.height/2);
     CCPoint viewPoint = ccpSub(centerOfView, actualPosition);
     this->setPosition(viewPoint);
@@ -123,6 +124,7 @@ void HelloWorld::setPlayerPosition(CCPoint position)
 
     int tileGid = _meta->tileGIDAt(tileCoord);
 
+    // 衝突判定
     if (tileGid) {
         CCDictionary *properties = _tileMap->propertiesForGID(tileGid);
         if (properties) {
@@ -146,7 +148,8 @@ void HelloWorld::setPlayerPosition(CCPoint position)
 
     if (this->isEncountered(result)) {
         std::cout << "敵が現れた！！" << std::endl;
-        CCDirector::sharedDirector()->replaceScene( CCTransitionFade::create(3.0f,BattleScene::createScene()) );
+//        CCDirector::sharedDirector()->replaceScene( CCTransitionFade::create(3.0f,BattleScene::createScene()) );
+//        CCDirector::sharedDirector()->replaceScene( CCTransitionFade::create(3.0f,HelloWorld::scene(2)) );
     }
 
 }
@@ -155,7 +158,7 @@ CCPoint HelloWorld::tileCoordForPosition(CCPoint position)
 {
     // タップ座標を取得
     CCPoint tilePoint = ccpSub(position, _tileMap->getPosition());
-    
+
     // タイルの幅
     float fTileWidth = _tileMap->getTileSize().width;
     // タイルの高さ
@@ -165,7 +168,7 @@ CCPoint HelloWorld::tileCoordForPosition(CCPoint position)
     // タップ座標をタイル座標に変換
     tilePoint.x = (int)(tilePoint.x / fTileWidth);
     tilePoint.y = (int)((fTileRows * fTileHeight - tilePoint.y) / fTileHeight);
-    
+
     return tilePoint;
 }
 
@@ -211,7 +214,7 @@ CCPoint HelloWorld::getDestinationPos(CCPoint touchLocation)
 {
     CCPoint playerPos = ((CCSprite *)_tileMap->getChildByTag(kTagPlayer))->getPosition();
     CCPoint diff = ccpSub(touchLocation, playerPos);
-    
+
     if ( abs(diff.x) > abs(diff.y) ) {
         if (diff.x > 0) {
             playerPos.x += _tileMap->getTileSize().width;
@@ -225,12 +228,15 @@ CCPoint HelloWorld::getDestinationPos(CCPoint touchLocation)
             playerPos.y -= _tileMap->getTileSize().height;
         }
     }
-    
+
     return playerPos;
 }
 
 void HelloWorld::playHeroMoveAnimationFromPosition(CCPoint fromPosition, CCPoint toPosition)
 {
+    /*
+    TODO:ここでキャラの向きを指定しているが、この向きを何処かで取得できないか？もしくはメンバ変数に持たせる？
+     */
     char* direction = "n";
     if(toPosition.x > fromPosition.x){
         direction = "e";
