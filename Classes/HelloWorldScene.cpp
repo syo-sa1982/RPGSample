@@ -35,6 +35,10 @@ bool HelloWorld::init()
         return false;
     }
 
+
+    CCLog("getScaleX x：%d", this->getScaleX());
+    CCLog("getScaleY y：%d", this->getScaleY());
+
     // タイルマップ呼び出し
     _tileMap = CCTMXTiledMap::create("th_cobit_rouka_1f.tmx");
     this->addChild(_tileMap, 0, kTagTileMap);
@@ -42,6 +46,18 @@ bool HelloWorld::init()
     CCSize CC_UNUSED tileSize = _tileMap->getContentSize();
     CCLOG("ContentSize: %f, %f", tileSize.width,tileSize.height);
 
+    CCLOG("ContentSize: %f, %f", this->getContentSize().width,this->getContentSize().height);
+
+    std::cout << "width: " << CCDirector::sharedDirector()->getWinSize().width << std::endl;
+    std::cout << "height: " << CCDirector::sharedDirector()->getWinSize().height << std::endl;
+
+    CCSize winSize = CCDirector::sharedDirector()->getWinSize();
+    std::cout << "width: " << winSize.width << std::endl;
+    std::cout << "height: " << winSize.height << std::endl;
+
+
+
+    _virtualPad = new VirtualPad(this);
 
     CCTMXObjectGroup *objectGroup = _tileMap->objectGroupNamed("Objects");
     if (objectGroup == NULL) {
@@ -76,7 +92,14 @@ bool HelloWorld::init()
 
     _tileMap->addChild(_player, 1);
 
-//    CCPoint playerPos = _player->getPosition();
+    CCPoint playerPos = _player->getPosition();
+
+
+    int zOrderplay = _player->getZOrder();
+
+    CCLog("playerPos重なり：%d", zOrderplay);
+    CCLog("playerPos x：%d", playerPos.x);
+    CCLog("playerPos y：%d", playerPos.y);
 
     // メタレイヤー
     _meta = _tileMap->layerNamed("Meta");
@@ -87,6 +110,9 @@ bool HelloWorld::init()
     this->setViewPlayerCenter();
     this->schedule(schedule_selector(HelloWorld::setViewPlayerCenter));
 
+
+    // マルチタッチ
+    this->setTouchMode(kCCTouchesAllAtOnce);
     // タッチを有効化
     this->setTouchEnabled(true);
 
@@ -96,6 +122,7 @@ bool HelloWorld::init()
 HelloWorld::~HelloWorld()
 {
     _player->release();
+    delete _virtualPad;
 }
 
 // プレイヤーの位置をセンターに
@@ -114,7 +141,12 @@ void HelloWorld::setViewPlayerCenter()
 
     CCPoint centerOfView = ccp(winSize.width/2, winSize.height/2);
     CCPoint viewPoint = ccpSub(centerOfView, actualPosition);
-    this->setPosition(viewPoint);
+
+//    CCLog("_tileMap x：%d", _tileMap->getPositionX());
+//    CCLog("_tileMap y：%d", _tileMap->getPositionY());
+//    CCLog("viewPoint x：%d", viewPoint.x);
+//    CCLog("viewPoint y：%d", viewPoint.y);
+    _tileMap->setPosition(viewPoint);
 }
 
 void HelloWorld::setPlayerPosition(CCPoint position)
@@ -172,10 +204,63 @@ CCPoint HelloWorld::tileCoordForPosition(CCPoint position)
     return tilePoint;
 }
 
-void HelloWorld::registerWithTouchDispatcher()
+//void HelloWorld::registerWithTouchDispatcher()
+//{
+//    // シングルタッチ
+//    CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, 0, true);
+//}
+
+// マルチタッチ：開始
+void HelloWorld::ccTouchesBegan(CCSet *touches, CCEvent *event)
 {
-    // シングルタッチ
-    CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, 0, true);
+    CCLog("ccTouchesBegan!");
+    for (CCSetIterator it = touches->begin(); it != touches->end(); ++it)
+    {
+        CCTouch *pTouch  = (CCTouch *)(*it);
+
+        CCLog("pTouch x：%d", (int)pTouch->getLocation().x);
+        CCLog("pTouch y：%d", (int)pTouch->getLocation().y);
+
+        //_virtualPad
+        _virtualPad->startPad((int)pTouch->getLocation().x,(int)pTouch->getLocation().y,pTouch->getID());
+    }
+
+}
+
+// マルチタッチ：移動
+void HelloWorld::ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent)
+{
+    CCLog("ccTouchesMoved!");
+    for (CCSetIterator it = pTouches->begin(); it != pTouches->end(); ++it)
+    {
+        CCTouch *pTouch  = (CCTouch *)(*it);
+        //_virtualPad
+        _virtualPad->update((int)pTouch->getLocation().x,(int)pTouch->getLocation().y,pTouch->getID());
+    }
+}
+
+// マルチタッチ：キャンセル
+void HelloWorld::ccTouchesCancelled(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent)
+{
+    CCLog("ccTouchesCancelled!");
+    for (CCSetIterator it = pTouches->begin(); it != pTouches->end(); ++it)
+    {
+        CCTouch *pTouch  = (CCTouch *)(*it);
+        //_virtualPad
+        _virtualPad->endPad(pTouch->getID());
+    }
+}
+
+// マルチタッチ：終了
+void HelloWorld::ccTouchesEnded(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent)
+{
+    CCLog("ccTouchesEnded!");
+    for (CCSetIterator it = pTouches->begin(); it != pTouches->end(); ++it)
+    {
+        CCTouch *pTouch  = (CCTouch *)(*it);
+        //_virtualPad
+        _virtualPad->endPad(pTouch->getID());
+    }
 }
 
 bool HelloWorld::ccTouchBegan(CCTouch *touch, CCEvent *event)

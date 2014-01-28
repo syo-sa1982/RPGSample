@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "Dice.h"
+#include "VirtualPad.h"
 
 class HelloWorld : public cocos2d::CCLayer
 {
@@ -22,17 +23,27 @@ public:
     // implement the "static node()" method manually
     CREATE_FUNC(HelloWorld);
 
-    void repositionSprite(float dt);
+//    void repositionSprite(float dt);
 
     // 画面の視野をプレイヤーの周辺に設定
     void setViewPlayerCenter();
 
     // キャラクタの位置をセット
     void setPlayerPosition(cocos2d::CCPoint position);
-    void registerWithTouchDispatcher();
+//    void registerWithTouchDispatcher();
 
     // キャラクタアニメーション
     void playHeroMoveAnimationFromPosition(cocos2d::CCPoint fromPosition, cocos2d::CCPoint toPosition);
+
+    virtual void ccTouchesBegan(cocos2d::CCSet *ptouches, cocos2d::CCEvent *pEvent);
+
+    virtual void ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
+
+    virtual void ccTouchesEnded(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
+
+    virtual void ccTouchesCancelled(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
+
+//    virtual void ccTouchesMoved(cocos2d::CCSet );
 
     // タップ開始
     virtual bool ccTouchBegan(cocos2d::CCTouch *touch, cocos2d::CCEvent *event);
@@ -57,9 +68,7 @@ private:
     cocos2d::CCSpriteFrameCache *_frameCache;
 
     Dice dice;
-
-
-
+    VirtualPad *_virtualPad;
 };
 
 #endif // __HELLOWORLD_SCENE_H__
