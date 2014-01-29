@@ -15,34 +15,18 @@ using namespace cocos2d;
 VirtualPad::VirtualPad(CCLayer* layer){
     //layer
     Layer = layer;
-
+    drawFlag = false;
 
     CCLOG("VirtualPad: %f, %f", Layer->getContentSize().width,Layer->getContentSize().height);
 
-//    float PadPositionX = Layer->getContentSize().width / 2;
-//    int PadPositionX = Layer->getContentSize().height / 2;
-
     //画像の生成
     padBack = CCSprite::create("padBack.png");
-
-
-    float PadPositionX = Layer->getContentSize().width / 2;
-    float PadPositionY = padBack->getContentSize().height / 2;
-
-    padBack->setVisible(true);
+    padBack->setVisible(false);
     padBack->setAnchorPoint(CCPoint(0.5f,0.5f));
 
-    padBack->setPosition(CCPoint(PadPositionX,PadPositionY));
-
     padFront = CCSprite::create("padFront.png");
-    padFront->setVisible(true);
+    padFront->setVisible(false);
     padFront->setAnchorPoint(CCPoint(0.5f,0.5f));
-
-    padFront->setPosition(CCPoint(PadPositionX,PadPositionY));
-
-
-    now_x = PadPositionX;
-    now_y = PadPositionY;
 
     //レイヤーに追加
     Layer->addChild(padBack,10000);
@@ -58,44 +42,6 @@ VirtualPad::VirtualPad(CCLayer* layer){
     }
 }
 
-//VirtualPad::VirtualPad(cocos2d::CCTMXTiledMap *pTileMap)
-//{
-//
-//    CCLog("CCTMXTiledMap!");
-//    //TileMap
-//    TileMap = pTileMap;
-//
-//
-//    //画像の生成
-//    padBack = CCSprite::create("padBack.png");
-//    padBack->setVisible(false);
-//    padBack->setAnchorPoint(CCPoint(0.5f,0.5f));
-//
-//    padFront = CCSprite::create("padFront.png");
-//    padFront->setVisible(false);
-//    padFront->setAnchorPoint(CCPoint(0.5f,0.5f));
-//
-//    //レイヤーに追加
-//    TileMap->addChild(padBack,10);
-//    TileMap->addChild(padFront,11);
-//
-//    int zOrderBack = padBack->getZOrder();
-//    CCPoint posBack = padBack->getPosition();
-//
-//    CCLog("back重なり：%d", zOrderBack);
-//    CCLog("back x：%d", posBack.x);
-//    CCLog("back y：%d", posBack.y);
-//
-//    //最大半径
-//    max_r = VIRTUAL_PAD_MAX_RATE ;
-//
-//    //角度毎のx,y位置テーブル作成
-//    for(int i=0;i<360;i++){
-//        fsin[i]=(float)sin(i*3.1415926535/180);
-//        fcos[i]=(float)cos(i*3.1415926535/180);
-//    }
-//}
-
 /**
  *Padの表示開始
  *@param x
@@ -104,14 +50,18 @@ VirtualPad::VirtualPad(CCLayer* layer){
 void VirtualPad::startPad(int x,int y,int touch_id){
     // 可動範囲内をタッチしたか？
 
-//    if(drawFlag == true)return;
-//    //画面左半分をタッチしたか
-//    CCSize size = CCDirector::sharedDirector()->getWinSize();
-//    if(x>size.width/2)return;
+    std::cout << "drawFlag : " << drawFlag << std::endl;
+    CCLOG("startPad");
+    if(drawFlag)return;
 
+
+    CCLOG("startedPad");
     drawFlag = true;
     start_x = x;
     start_y = y;
+
+    now_x = x;
+    now_y = y;
     d_x = 0;
     d_y = 0;
 
@@ -120,23 +70,23 @@ void VirtualPad::startPad(int x,int y,int touch_id){
     angle = 0;
     way_x = 0;
     way_y = 0;
-//
-//    padBack->setVisible(true);
-//    padBack->setPosition(CCPoint(start_x, start_y));
-//    padFront->setVisible(true);
-//    padFront->setPosition(CCPoint(now_x, now_y));
+
+    padBack->setVisible(true);
+    padBack->setPosition(CCPoint(start_x, start_y));
+    padFront->setVisible(true);
+    padFront->setPosition(CCPoint(now_x, now_y));
 }
 
 /**
  *Padの表示終了
  */
 void VirtualPad::endPad(int touch_id){
-    if(drawFlag == false)return;
+    if(!drawFlag)return;
     if(touch_id != touchID)return;
     drawFlag = false;
 
-//    padBack->setVisible(false);
-//    padFront->setVisible(false);
+    padBack->setVisible(false);
+    padFront->setVisible(false);
 }
 
 /**
@@ -145,7 +95,7 @@ void VirtualPad::endPad(int touch_id){
  *@param y
  */
 void VirtualPad::update(int x,int y,int touch_id){
-    if(drawFlag == false)return;
+    if(!drawFlag)return;
     if(touch_id != touchID)return;
     //移動量
     d_x = x-start_x;
@@ -166,7 +116,7 @@ void VirtualPad::update(int x,int y,int touch_id){
     //位置をセット
     now_x = x;
     now_y = y;
-//    padBack->setPosition(CCPoint(start_x, start_y));
+    padBack->setPosition(CCPoint(start_x, start_y));
     padFront->setPosition(CCPoint(now_x, now_y));
 
 }
