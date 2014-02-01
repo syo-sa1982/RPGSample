@@ -95,6 +95,7 @@ void VirtualPad::endPad(int touch_id){
  *@param y
  */
 void VirtualPad::update(int x,int y,int touch_id){
+    CCLog("update!!");
     if(!drawFlag)return;
     if(touch_id != touchID)return;
     //移動量
@@ -157,23 +158,23 @@ int VirtualPad::get4Way(){
 
     //移動していないか
     if(d_x*d_x + d_y*d_y< VIRTUAL_PAD_MIN_RATE*VIRTUAL_PAD_MIN_RATE){
-        return kCenter;
+        return padDirection::kCenter;
     }
     //上
     if(way_x<=fcos[45]&&way_x>=fcos[135]&&way_y>0){
-        return kUp;
+        return padDirection::kUp;
     }
     //下
     if(way_x<=fcos[315]&&way_x>=fcos[225]&&way_y<0){
-        return kDown;
+        return padDirection::kDown;
     }
     //左
     if(way_y<=fsin[135]&&way_y>=fsin[225]&&way_x<0){
-        return kLeft;
+        return padDirection::kLeft;
     }
     //右
     if(way_y<=fsin[45]&&way_y>=fsin[315]&&way_x>0){
-        return kRight;
+        return padDirection::kRight;
     }
     return -1;
 }

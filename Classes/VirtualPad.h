@@ -8,7 +8,9 @@
 
 #include "cocos2d.h"
 
-class VirtualPad {
+
+namespace padDirection
+{
     /*
     方向を列挙体で指定。
     対応方向は下記参照
@@ -27,6 +29,9 @@ class VirtualPad {
         kRightUp     = 3,
         kRightDown   = 9,
     };
+};
+
+class VirtualPad {
 
 private:
     //Layer

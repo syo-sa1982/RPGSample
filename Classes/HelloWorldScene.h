@@ -29,7 +29,8 @@ public:
     void setViewPlayerCenter();
 
     // キャラクタの位置をセット
-    void setPlayerPosition(cocos2d::CCPoint position);
+    void setPlayerPosition();
+//    void setPlayerPosition(cocos2d::CCPoint position);
 //    void registerWithTouchDispatcher();
 
     // キャラクタアニメーション

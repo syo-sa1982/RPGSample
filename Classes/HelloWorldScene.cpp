@@ -35,9 +35,8 @@ bool HelloWorld::init()
         return false;
     }
 
-
-    CCLog("getScaleX x：%d", this->getScaleX());
-    CCLog("getScaleY y：%d", this->getScaleY());
+    // バーチャルパッド
+    _virtualPad = new VirtualPad(this);
 
     // タイルマップ呼び出し
     _tileMap = CCTMXTiledMap::create("th_cobit_rouka_1f.tmx");
@@ -52,12 +51,8 @@ bool HelloWorld::init()
     std::cout << "height: " << CCDirector::sharedDirector()->getWinSize().height << std::endl;
 
     CCSize winSize = CCDirector::sharedDirector()->getWinSize();
-    std::cout << "width: " << winSize.width << std::endl;
-    std::cout << "height: " << winSize.height << std::endl;
 
 
-
-    _virtualPad = new VirtualPad(this);
 
     CCTMXObjectGroup *objectGroup = _tileMap->objectGroupNamed("Objects");
     if (objectGroup == NULL) {
@@ -73,33 +68,28 @@ bool HelloWorld::init()
 
     // テクスチャアトラスからのキャラ生成
     _frameCache = CCSpriteFrameCache::sharedSpriteFrameCache();
-//    CCSize size = CCDirector::sharedDirector()->getWinSize();
     _frameCache->addSpriteFramesWithFile("character.plist");
 
-//    _player = CCSprite::create("Player.png");
 
     _player = CCSprite::createWithSpriteFrameName("male_walkcycle_e_01.png");
 
     // プレイヤーをタグ識別
-    _player->setTag(kTagPlayer);
+//    _player->setTag(kTagPlayer);
     _player->retain();
 
+
+    CCLog("playerPos x：%d", x);
+    CCLog("playerPos y：%d", y);
+
     // スプライトに座標セット
-//    _player->setPosition(ccp(size.width/2, size.height/2));
     _player->setPosition(ccp(x,y));
+
+//    _player->setPosition(ccp(0,0));
     _player->setScale(1);
     _player->setAnchorPoint(ccp(0.5,0));
 
-    _tileMap->addChild(_player, 1);
+    _tileMap->addChild(_player, 1, kTagPlayer);
 
-    CCPoint playerPos = _player->getPosition();
-
-
-    int zOrderplay = _player->getZOrder();
-
-    CCLog("playerPos重なり：%d", zOrderplay);
-    CCLog("playerPos x：%d", playerPos.x);
-    CCLog("playerPos y：%d", playerPos.y);
 
     // メタレイヤー
     _meta = _tileMap->layerNamed("Meta");
@@ -109,6 +99,17 @@ bool HelloWorld::init()
     // 画面の表示座標をセット
     this->setViewPlayerCenter();
     this->schedule(schedule_selector(HelloWorld::setViewPlayerCenter));
+
+
+    CCPoint playerPos = ((CCSprite *)_tileMap->getChildByTag(kTagPlayer))->getPosition();
+
+
+
+    int zOrderplay = _player->getZOrder();
+
+    CCLog("playerPos重なり：%d", zOrderplay);
+    CCLog("playerPos x：%d", playerPos.x);
+    CCLog("playerPos y：%d", playerPos.y);
 
 
     // マルチタッチ
@@ -149,40 +150,97 @@ void HelloWorld::setViewPlayerCenter()
     _tileMap->setPosition(viewPoint);
 }
 
-void HelloWorld::setPlayerPosition(CCPoint position)
+//void HelloWorld::setPlayerPosition(CCPoint position)
+void HelloWorld::setPlayerPosition()
 {
-    CCPoint tileCoord = this->tileCoordForPosition(position);
-    CCPoint frompos = _player->getPosition();
+    int way = -1,d_x = 0,d_y = 0;
+    if(_virtualPad->getDrawFlag() == true){
+        // 方向取得
+        way = _virtualPad->get4Way();
+        CCLOG("VirtualPad get4Way is : %d", way);
 
-    int tileGid = _meta->tileGIDAt(tileCoord);
+        switch (way) {
+            // 真ん中
+            case padDirection::kCenter :
+                break;
+                // 上
+            case padDirection::kUp :
+                d_y = 1;
+                break;
+                // 下
+            case padDirection::kDown :
+                d_y = -1;
+                break;
+                // 左
+            case padDirection::kLeft :
+                d_x = -1;
+                break;
+                // 右
+            case padDirection::kRight :
+                d_x = 1;
+                break;
+        }
 
-    // 衝突判定
-    if (tileGid) {
-        CCDictionary *properties = _tileMap->propertiesForGID(tileGid);
-        if (properties) {
-            CCString *collision = new CCString();
-            *collision = *properties->valueForKey("Collidable");
-            if (collision && (collision->compare("true") == 0)) {
-                this->playHeroMoveAnimationFromPosition(frompos, position);
-                return;
-            }
+        _player->setPosition(ccp(_player->getPositionX() + d_x, _player->getPositionY() + d_y));
+    }
+
+    CCPoint playerPos = ((CCSprite *)_tileMap->getChildByTag(kTagPlayer))->getPosition();
+
+    CCLog("playerPos x：%d", playerPos.x);
+    CCLog("playerPos y：%d", playerPos.y);
+    CCLog("_player x：%d", (int)_player->getPosition().x);
+    CCLog("_player y：%d", (int)_player->getPosition().y);
+
+    if ( abs(d_x) > abs(d_y) ) {
+        if (d_x > 0) {
+            playerPos.x += _tileMap->getTileSize().width;
+        } else {
+            playerPos.x -= _tileMap->getTileSize().width;
+        }
+    } else {
+        if (d_y > 0) {
+            playerPos.y += _tileMap->getTileSize().height;
+        } else {
+            playerPos.y -= _tileMap->getTileSize().height;
         }
     }
-    this->playHeroMoveAnimationFromPosition(frompos, position);
-    CCMoveTo* moveTo = CCMoveTo::create(0.1f, position);
-    _player->runAction(moveTo);
 
-    std::cout << "10D10===========================" << std::endl;
-    dice.roll(10, 10);
-    int result = dice.getRollResult();
-    dice.reset();
-    std::cout << "合計値 : " << result << std::endl;
+    CCLog("playerPos2 x：%d", playerPos.x);
+    CCLog("playerPos2 y：%d", playerPos.y);
 
-    if (this->isEncountered(result)) {
-        std::cout << "敵が現れた！！" << std::endl;
-//        CCDirector::sharedDirector()->replaceScene( CCTransitionFade::create(3.0f,BattleScene::createScene()) );
-//        CCDirector::sharedDirector()->replaceScene( CCTransitionFade::create(3.0f,HelloWorld::scene(2)) );
-    }
+
+//    CCPoint tileCoord = this->tileCoordForPosition(position);
+//    CCPoint frompos = _player->getPosition();
+
+//    int tileGid = _meta->tileGIDAt(tileCoord);
+//
+//    // 衝突判定
+//    if (tileGid) {
+//        CCDictionary *properties = _tileMap->propertiesForGID(tileGid);
+//        if (properties) {
+//            CCString *collision = new CCString();
+//            *collision = *properties->valueForKey("Collidable");
+//            if (collision && (collision->compare("true") == 0)) {
+//                this->playHeroMoveAnimationFromPosition(frompos, position);
+//                return;
+//            }
+//        }
+//    }
+//    this->playHeroMoveAnimationFromPosition(frompos, position);
+//    CCMoveTo* moveTo = CCMoveTo::create(0.1f, position);
+//    _player->runAction(moveTo);
+//
+//    std::cout << "10D10===========================" << std::endl;
+//    dice.roll(10, 10);
+//    int result = dice.getRollResult();
+//    dice.reset();
+//    std::cout << "合計値 : " << result << std::endl;
+//
+//    if (this->isEncountered(result)) {
+//        std::cout << "敵が現れた！！" << std::endl;
+////        CCDirector::sharedDirector()->replaceScene( CCTransitionFade::create(3.0f,BattleScene::createScene()) );
+////        CCDirector::sharedDirector()->replaceScene( CCTransitionFade::create(3.0f,HelloWorld::scene(2)) );
+//    }
 
 }
 
@@ -218,8 +276,12 @@ void HelloWorld::ccTouchesBegan(CCSet *touches, CCEvent *event)
     {
         CCTouch *pTouch  = (CCTouch *)(*it);
 
+
+
         CCLog("pTouch x：%d", (int)pTouch->getLocation().x);
         CCLog("pTouch y：%d", (int)pTouch->getLocation().y);
+        CCLog("_player x：%d", (int)_player->getPosition().x);
+        CCLog("_player y：%d", (int)_player->getPosition().y);
 
         //_virtualPad
         _virtualPad->startPad((int)pTouch->getLocation().x,(int)pTouch->getLocation().y,pTouch->getID());
@@ -237,6 +299,8 @@ void HelloWorld::ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEve
         //_virtualPad
         _virtualPad->update((int)pTouch->getLocation().x,(int)pTouch->getLocation().y,pTouch->getID());
     }
+    // プレイヤーをこの関数で移動
+    this->schedule(schedule_selector(HelloWorld::setPlayerPosition));
 }
 
 // マルチタッチ：キャンセル
@@ -263,6 +327,7 @@ void HelloWorld::ccTouchesEnded(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEve
     }
 }
 
+// シングルタッチ開始
 bool HelloWorld::ccTouchBegan(CCTouch *touch, CCEvent *event)
 {
     CCLog("ccTouchBegan!");
@@ -283,7 +348,7 @@ bool HelloWorld::ccTouchBegan(CCTouch *touch, CCEvent *event)
         destinationPos.y >= 0 &&
         destinationPos.x >= 0)
     {
-        this->setPlayerPosition(destinationPos);
+//        this->setPlayerPosition(destinationPos);
     }
 
     CCLog("ccTouchBegan end!");
