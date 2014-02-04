@@ -157,7 +157,7 @@ void HelloWorld::setViewPlayerCenter()
 void HelloWorld::setPlayerPosition()
 {
     int way = -1,d_x = 0,d_y = 0;
-    if(_virtualPad->getDrawFlag() == true){
+    if(_virtualPad->getDrawFlag()){
         // 方向取得
         way = _virtualPad->get4Way();
         CCLOG("VirtualPad get4Way is : %d", way);
@@ -224,7 +224,7 @@ void HelloWorld::setPlayerPosition()
     }
 
     this->playHeroMoveAnimationFromPosition(frompos, playerPos);
-    CCMoveTo* moveTo = CCMoveTo::create(0.1f, playerPos);
+    CCMoveTo* moveTo = CCMoveTo::create(0.2f, playerPos);
     _player->runAction(moveTo);
     this->setViewPlayerCenter();
 
@@ -347,61 +347,6 @@ void HelloWorld::ccTouchesEnded(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEve
     }
     this->unschedule(schedule_selector(HelloWorld::setPlayerPosition));
     this->unschedule(schedule_selector(HelloWorld::setViewPlayerCenter));
-}
-
-// シングルタッチ開始
-bool HelloWorld::ccTouchBegan(CCTouch *touch, CCEvent *event)
-{
-    CCLog("ccTouchBegan!");
-    // タップした座標
-    CCPoint touchLocation = touch->getLocationInView();
-
-    CCPoint playerPos = ((CCSprite *)_tileMap->getChildByTag(kTagPlayer))->getPosition();
-
-    touchLocation = CCDirector::sharedDirector()->convertToGL(touchLocation);
-    touchLocation = this->convertToNodeSpace(touchLocation);
-
-    // 目的地
-    CCPoint destinationPos = this->getDestinationPos(touchLocation);
-
-    // safety check on the bounds of the map
-    if (destinationPos.x <= (_tileMap->getMapSize().width * _tileMap->getTileSize().width) &&
-        destinationPos.y <= (_tileMap->getMapSize().height * _tileMap->getTileSize().height) &&
-        destinationPos.y >= 0 &&
-        destinationPos.x >= 0)
-    {
-//        this->setPlayerPosition(destinationPos);
-    }
-
-    CCLog("ccTouchBegan end!");
-    return true;
-}
-
-void HelloWorld::ccTouchEnded(CCTouch *touch, CCEvent *event)
-{
-    CCLog("TouchEnd!");
-}
-
-CCPoint HelloWorld::getDestinationPos(CCPoint touchLocation)
-{
-    CCPoint playerPos = ((CCSprite *)_tileMap->getChildByTag(kTagPlayer))->getPosition();
-    CCPoint diff = ccpSub(touchLocation, playerPos);
-
-    if ( abs(diff.x) > abs(diff.y) ) {
-        if (diff.x > 0) {
-            playerPos.x += _tileMap->getTileSize().width;
-        } else {
-            playerPos.x -= _tileMap->getTileSize().width;
-        }
-    } else {
-        if (diff.y > 0) {
-            playerPos.y += _tileMap->getTileSize().height;
-        } else {
-            playerPos.y -= _tileMap->getTileSize().height;
-        }
-    }
-
-    return playerPos;
 }
 
 void HelloWorld::playHeroMoveAnimationFromPosition(CCPoint fromPosition, CCPoint toPosition)

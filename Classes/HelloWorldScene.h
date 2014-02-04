@@ -12,6 +12,16 @@ class HelloWorld : public cocos2d::CCLayer
         kEncounterRate = 50, // エンカウント率
     };
 
+
+private:
+    cocos2d::CCTMXTiledMap      *_tileMap;
+    cocos2d::CCTMXLayer         *_meta;
+    cocos2d::CCSprite           *_player;
+    cocos2d::CCSpriteFrameCache *_frameCache;
+
+    Dice dice;
+    VirtualPad *_virtualPad;
+
 public:
     // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
     virtual bool init();
@@ -55,21 +65,17 @@ public:
     // タップした箇所のタイル座標を取得
     cocos2d::CCPoint tileCoordForPosition(cocos2d::CCPoint position);
 
-    cocos2d::CCPoint getDestinationPos(cocos2d::CCPoint touchLocation);
+    
 
+    /**
+    * エンカウント判定
+    */
     inline bool isEncountered(int rollRsulte)
     {
         return kEncounterRate > rollRsulte ? true :false;
     }
 
-private:
-    cocos2d::CCTMXTiledMap      *_tileMap;
-    cocos2d::CCTMXLayer         *_meta;
-    cocos2d::CCSprite           *_player;
-    cocos2d::CCSpriteFrameCache *_frameCache;
 
-    Dice dice;
-    VirtualPad *_virtualPad;
 };
 
 #endif // __HELLOWORLD_SCENE_H__
