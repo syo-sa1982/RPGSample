@@ -204,7 +204,10 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
+		74061A70D9068029CFA5D163 /* VirtualPad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74061E9665023BFEAF791711 /* VirtualPad.cpp */; };
+		74061A94025775A1BBF31570 /* padBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 7406108B1FCB1EBEB2A7454A /* padBack.png */; };
 		74061D30B076111CC1400CF8 /* BattleScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 740613C62EC84C518A477458 /* BattleScene.cpp */; };
+		74061FB0F273B06D5D003A92 /* padFront.png in Resources */ = {isa = PBXBuildFile; fileRef = 74061EDE25923F2CE0C580AD /* padFront.png */; };
 		74061FC529D2A6351772E228 /* Dice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7406153C91FA99BD53E093B6 /* Dice.cpp */; };
 		7855E0E1153FEF240059DD9A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7855E0DF153FEF240059DD9A /* Default.png */; };
 		8E1B8FD917E5B3F90039BCFC /* th_cobit_rooms_1f_north.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 8E1B8FD817E5B3F90039BCFC /* th_cobit_rooms_1f_north.tmx */; };
@@ -718,9 +721,13 @@
 		1D6058910D05DD3D006BFB54 /* EvilHouse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EvilHouse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		7406108B1FCB1EBEB2A7454A /* padBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = padBack.png; sourceTree = "<group>"; };
+		740611F5890F6EB95C8FB42F /* VirtualPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VirtualPad.h; sourceTree = "<group>"; };
 		740613C62EC84C518A477458 /* BattleScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BattleScene.cpp; sourceTree = "<group>"; };
 		7406153C91FA99BD53E093B6 /* Dice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dice.cpp; sourceTree = "<group>"; };
 		74061BD2338EE919D5E0FFA0 /* Dice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dice.h; sourceTree = "<group>"; };
+		74061E9665023BFEAF791711 /* VirtualPad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VirtualPad.cpp; sourceTree = "<group>"; };
+		74061EDE25923F2CE0C580AD /* padFront.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = padFront.png; sourceTree = "<group>"; };
 		74061F6036686F3A2230E38F /* BattleScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattleScene.h; sourceTree = "<group>"; };
 		7855E0DF153FEF240059DD9A /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = SOURCE_ROOT; };
 		8E1B8FD817E5B3F90039BCFC /* th_cobit_rooms_1f_north.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = th_cobit_rooms_1f_north.tmx; sourceTree = "<group>"; };
@@ -1349,6 +1356,8 @@
 				7406153C91FA99BD53E093B6 /* Dice.cpp */,
 				740613C62EC84C518A477458 /* BattleScene.cpp */,
 				74061F6036686F3A2230E38F /* BattleScene.h */,
+				74061E9665023BFEAF791711 /* VirtualPad.cpp */,
+				740611F5890F6EB95C8FB42F /* VirtualPad.h */,
 			);
 			name = Classes;
 			path = ../classes;
@@ -1660,6 +1669,8 @@
 				D4EF949F15BD2D9800D803EB /* Icon-144.png */,
 				D4EF949915BD2D8B00D803EB /* Icon-57.png */,
 				D4EF949D15BD2D9600D803EB /* Icon-72.png */,
+				74061EDE25923F2CE0C580AD /* padFront.png */,
+				7406108B1FCB1EBEB2A7454A /* padBack.png */,
 			);
 			name = Resources;
 			path = ../Resources;
@@ -1978,6 +1989,8 @@
 				8E1B8FD917E5B3F90039BCFC /* th_cobit_rooms_1f_north.tmx in Resources */,
 				8E8C1F78180BEFFB00818BB3 /* yakusyo_hanyou.png in Resources */,
 				8E8C1F65180BEFFB00818BB3 /* elev.png in Resources */,
+				74061FB0F273B06D5D003A92 /* padFront.png in Resources */,
+				74061A94025775A1BBF31570 /* padBack.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2175,6 +2188,7 @@
 				1A9CE89A1765A12C000E3062 /* CCInputDelegate.cpp in Sources */,
 				74061FC529D2A6351772E228 /* Dice.cpp in Sources */,
 				74061D30B076111CC1400CF8 /* BattleScene.cpp in Sources */,
+				74061A70D9068029CFA5D163 /* VirtualPad.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2233,7 +2247,7 @@
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv6 armv7 i386";
 			};
@@ -2280,7 +2294,7 @@
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
 			};
